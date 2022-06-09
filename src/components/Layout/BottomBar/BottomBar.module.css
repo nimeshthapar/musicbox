@@ -1,0 +1,17 @@
+.bottom {
+	display: none;
+}
+
+@media (max-width: 640px) {
+	.bottom {
+		background-color: #ffa1a1;
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		height: 60px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}

@@ -1,0 +1,16 @@
+.main {
+	background-color: #ffa1a1;
+	width: 200px;
+	height: 98vh;
+	border-radius: 40px 0 0 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@media (max-width: 640px) {
+	.main {
+		display: none;
+	}
+}

@@ -1,13 +1,56 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+		'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #000;
+	padding: 0.4rem;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+.spotify-logo {
+	width: 200px;
+	height: 200px;
+	margin-bottom: 1rem;
+}
+
+.spotify-logo img {
+	width: 100%;
+	height: 100%;
+}
+
+.login-link {
+	border-radius: 20px;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 50px;
+	color: #293462;
+	border: 1px solid#fff;
+	font-weight: 700;
+	font-size: 1.4rem;
+	letter-spacing: 1px;
+}
+
+.login-link:hover {
+	background-color: #293462;
+	color: #fff;
+}
+
+@media (max-width: 640px) {
+	body {
+		padding: 0;
+	}
 }

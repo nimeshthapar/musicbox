@@ -1,0 +1,25 @@
+.layout {
+	display: flex;
+	background: #293462;
+	border-radius: 60px;
+}
+
+.layout:last-child {
+	flex: 1;
+	height: 98vh;
+}
+
+@media (max-width: 640px) {
+	.layout {
+		border-radius: 0;
+		display: block;
+	}
+
+	.layout:last-child {
+		height: calc(100vh - 60px);
+	}
+
+	.layout.login {
+		height: 100vh;
+	}
+}
