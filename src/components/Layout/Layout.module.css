@@ -1,22 +1,23 @@
 .layout {
 	display: flex;
-	background: #293462;
-	border-radius: 60px;
+	background: #533e85;
+	width: calc(100%-200px);
+	padding-left: 200px;
+	height: 100%;
 }
 
-.layout:last-child {
-	flex: 1;
-	height: 98vh;
+.layout.login {
+	height: 100vh;
+	padding-left: 0;
 }
 
 @media (max-width: 640px) {
 	.layout {
 		border-radius: 0;
 		display: block;
-	}
-
-	.layout:last-child {
-		height: calc(100vh - 60px);
+		padding-left: 0;
+		padding-bottom: 60px;
+		width: 100%;
 	}
 
 	.layout.login {

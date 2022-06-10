@@ -1,5 +1,6 @@
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setClientToken } from '../util/spotify';
 
 type AuthContextType = {
 	isLoggedIn: boolean;
@@ -20,14 +21,15 @@ type AuthProviderProps = {
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [token, setToken] = useState('');
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+	const [token, setToken] = useState<string>('');
 	const navigate = useNavigate();
 
 	const login = useCallback((tkn: string) => {
 		setToken(tkn);
 		setIsLoggedIn(true);
 		localStorage.setItem('token', tkn);
+		setClientToken(tkn);
 	}, []);
 
 	const logout = () => {

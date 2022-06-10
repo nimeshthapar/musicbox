@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Favorites from './pages/Favorites';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from './store/auth';
+import NotFound from './pages/NotFound';
 
 function App() {
 	const { login, isLoggedIn } = useContext(AuthContext);
@@ -29,6 +30,7 @@ function App() {
 			<Route path="/playlist/:pid" element={<Playlist />} />
 			<Route path="/player" element={<MusicPlayer />} />
 			<Route path="/favorites" element={<Favorites />} />
+			<Route path="/*" element={<NotFound />} />
 		</Routes>
 	);
 
