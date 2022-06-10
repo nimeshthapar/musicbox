@@ -4,7 +4,7 @@ import classes from './NotFoundDiv.module.css';
 
 const NotFoundDiv = () => {
 	return (
-		<div className={classes.container}>
+		<div className={`${classes.container} full`}>
 			<div className={classes['img-container']}>
 				<img src={NotFoundImg} alt="Not-Found" />
 			</div>

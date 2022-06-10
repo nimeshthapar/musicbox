@@ -1,0 +1,39 @@
+.category-list p {
+	text-align: center;
+	font-size: 1.2rem;
+	margin: 0;
+	color: #fff;
+}
+
+.img-container {
+	position: relative;
+}
+
+.img-container {
+	height: 250px;
+	width: 250px;
+}
+
+.img-container img {
+	height: 100%;
+	width: 100%;
+}
+
+.img-container span {
+	position: absolute;
+	bottom: 0;
+	background-color: #fff;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	right: 0.4rem;
+}
+
+.img-container svg {
+	height: 50px;
+	width: 50px;
+	color: #533e85;
+}

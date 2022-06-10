@@ -37,7 +37,11 @@ const NavBarButton = ({
 		return button;
 	}
 
-	return <Link to={path}>{button}</Link>;
+	return (
+		<div className={classes['link-container']}>
+			<Link to={path}>{button}</Link>
+		</div>
+	);
 };
 
 export default NavBarButton;

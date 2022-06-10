@@ -10,7 +10,7 @@ const Home = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	let offset = useRef<number>(0);
 	useEffect(() => {
-		const fetchPlaylists = async () => {
+		const fetchCategories = async () => {
 			setIsLoading(true);
 			const response = await apiClient.get(
 				`browse/categories?country=IN&limit=12&offset=${offset.current}`
@@ -24,24 +24,36 @@ const Home = () => {
 				});
 			}
 
-			setCategories((prev) => [...prev, ...loadedCategories]);
+			setCategories((prev) => {
+				const newList = [...prev, ...loadedCategories];
+
+				const jsonObject = newList.map((el) => JSON.stringify(el));
+
+				const uniqueSet = new Set(jsonObject);
+				return Array.from(uniqueSet).map((el) => JSON.parse(el));
+			});
 			setIsLoading(false);
 			offset.current = offset.current + 12;
 		};
 
-		fetchPlaylists();
+		fetchCategories();
 
-		window.addEventListener('scroll', () => {
-			let userScrollHeight = window.innerHeight + window.scrollY;
-			let windowBottomHeight = document.documentElement.offsetHeight;
-			if (userScrollHeight >= windowBottomHeight && offset.current < 55) {
-				fetchPlaylists();
-			}
-		});
+		if (offset.current < 55) {
+			window.addEventListener('scroll', () => {
+				let userScrollHeight = window.innerHeight + window.scrollY;
+				let windowBottomHeight = document.documentElement.offsetHeight;
+				if (
+					userScrollHeight >= windowBottomHeight &&
+					offset.current < 55
+				) {
+					fetchCategories();
+				}
+			});
+		}
 	}, []);
 
 	const ulEl = (
-		<ul className={classes['category-lists']}>
+		<ul className={classes.lists}>
 			{categories.map((category) => (
 				<Category
 					key={category.id}

@@ -14,7 +14,11 @@
 	transform: scale(1.05);
 }
 
-a {
+.link-container {
+	width: 100%;
+}
+
+.link-container a {
 	text-decoration: none;
 	width: 100%;
 	display: inline-block;

@@ -1,19 +1,13 @@
 import React from 'react';
-import { MdPlayArrow } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { categoryType } from '../../models/category';
-import classes from './Category.module.css';
+import Li from '../UI/Li/Li';
 
 const Category = ({ id, name, image }: categoryType) => {
 	return (
-		<li className={classes['category-list']}>
-			<div className={classes['img-container']}>
-				<img src={image} alt={id} />
-				<a href="/">
-					<MdPlayArrow />
-				</a>
-			</div>
-			<p>{name}</p>
-		</li>
+		<Link to={`/playlist/${id}`}>
+			<Li id={id} name={name} image={image} />
+		</Link>
 	);
 };
 
