@@ -18,11 +18,13 @@ const NavBarButton = ({
 	onClick,
 }: NavBarButtonProps) => {
 	const location = useLocation();
+	const keyPath = path.split('/')[1];
 
 	const button = (
 		<span
 			className={
-				location.pathname === path
+				location.pathname === path ||
+				(keyPath !== '' && location.pathname.includes(keyPath))
 					? `${classes['nav-btn']} ${classes.active}`
 					: classes['nav-btn']
 			}

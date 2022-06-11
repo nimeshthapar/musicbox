@@ -68,13 +68,8 @@ const Home = () => {
 	return (
 		<div className={classes.screen}>
 			<h1 className={classes.heading}>Browse Categories</h1>
-			{isLoading ? (
-				<div className="center full">
-					<Loading white={true} />
-				</div>
-			) : (
-				ulEl
-			)}
+			{!isLoading && ulEl}
+			{isLoading && <Loading white={true} />}
 		</div>
 	);
 };

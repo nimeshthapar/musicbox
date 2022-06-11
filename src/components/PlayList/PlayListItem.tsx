@@ -7,7 +7,7 @@ type PlaylistType = categoryType;
 
 const PlayListItem = ({ id, image, name }: PlaylistType) => {
 	return (
-		<Link to={`${id}`}>
+		<Link to={`/player/${id}`}>
 			<Li id={id} image={image} name={name} />
 		</Link>
 	);

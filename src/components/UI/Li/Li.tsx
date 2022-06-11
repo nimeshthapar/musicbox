@@ -14,7 +14,7 @@ const Li = ({ image, id, name }: categoryType) => {
 						<MdPlayArrow />
 					</span>
 				</div>
-				<p>{name}</p>
+				<p>{name.length < 15 ? name : name.substring(0, 16) + '...'}</p>
 			</Card>
 		</li>
 	);

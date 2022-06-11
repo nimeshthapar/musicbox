@@ -5,6 +5,7 @@ import apiClient from '../util/spotify';
 import { categoryType } from '../models/category';
 import Loading from '../components/Loading/Loading';
 import PlayListItem from '../components/PlayList/PlayListItem';
+import playlistPng from '../assets/images.png';
 
 type PlaylistType = categoryType;
 
@@ -17,17 +18,24 @@ const Playlist = () => {
 	useEffect(() => {
 		const fetchPlaylists = async () => {
 			setIsLoading(true);
-			const response = await apiClient.get(
-				`browse/categories/${pid}/playlists?offset=${offset.current}&limit=12`
-			);
+			const uri =
+				pid === 'me'
+					? 'me/playlists'
+					: `browse/categories/${pid}/playlists?offset=${offset.current}&limit=12`;
+			const response = await apiClient.get(uri);
 
-			console.log(response);
 			const loadedPlaylists: PlaylistType[] = [];
-			for (const playlist of response.data.playlists.items) {
+
+			for (const playlist of pid === 'me'
+				? response.data.items
+				: response.data.playlists.items) {
 				loadedPlaylists.push({
 					name: playlist.name,
 					id: playlist.id,
-					image: playlist.images[0].url,
+					image:
+						playlist.images.length > 0
+							? playlist.images[0].url
+							: playlistPng,
 				});
 			}
 
@@ -69,14 +77,11 @@ const Playlist = () => {
 
 	return (
 		<div className={classes.screen}>
-			<h1 className={classes.heading}>Browse Categories</h1>
-			{isLoading ? (
-				<div className="center full">
-					<Loading white={true} />
-				</div>
-			) : (
-				playlistUlEl
-			)}
+			<h1 className={classes.heading}>
+				{pid === 'me' ? 'My PlayList' : 'Playlists'}
+			</h1>
+			{!isLoading && playlistUlEl}
+			{isLoading && <Loading white={true} />}
 		</div>
 	);
 };

@@ -26,7 +26,7 @@ const NavLinks = () => {
 				<NavBarButton
 					Icon={MdPlaylistPlay}
 					title="Playlists"
-					path="/playlist/p1"
+					path="/playlist/me"
 					btn={false}
 				/>
 			)}

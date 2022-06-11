@@ -7,14 +7,16 @@ type LoadingProps = {
 
 const Loading = ({ white }: LoadingProps) => {
 	return (
-		<div
-			className={`${classes['lds-ellipsis']} ${
-				!white && classes['not-white']
-			}`}
-		>
-			<div></div>
-			<div></div>
-			<div></div>
+		<div className={classes.center}>
+			<div
+				className={`${classes['lds-ellipsis']} ${
+					!white && classes['not-white']
+				}`}
+			>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
 		</div>
 	);
 };

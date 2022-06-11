@@ -5,6 +5,18 @@
 	color: #fff;
 }
 
+.category-list:hover {
+	transform: scale(1.05);
+}
+
+.category-list:hover span {
+	visibility: visible;
+}
+
+.category-list:hover img {
+	opacity: 0.8;
+}
+
 .img-container {
 	position: relative;
 }
@@ -20,9 +32,10 @@
 }
 
 .img-container span {
+	visibility: hidden;
 	position: absolute;
 	bottom: 0;
-	background-color: #fff;
+	background-color: #ffa1a1;
 	border-radius: 50%;
 	height: 50px;
 	width: 50px;
@@ -36,4 +49,17 @@
 	height: 50px;
 	width: 50px;
 	color: #533e85;
+}
+
+@media (max-width: 640px) {
+	.img-container {
+		height: 150px;
+		width: 150px;
+	}
+
+	.category-list p {
+		font-size: 1rem;
+		width: 150px;
+		word-wrap: break-word;
+	}
 }

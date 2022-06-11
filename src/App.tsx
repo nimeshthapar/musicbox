@@ -8,15 +8,15 @@ import Favorites from './pages/Favorites';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from './store/auth';
 import NotFound from './pages/NotFound';
+import { useLocation } from 'react-router-dom';
 
 function App() {
 	const { login, isLoggedIn } = useContext(AuthContext);
-
+	const location = useLocation();
 	useEffect(() => {
-		const hash = window.location.hash;
-		const token = hash.split('&')[0].split('=')[1];
+		const token = location.hash.split('&')[0].split('=')[1];
 		if (token) login(token);
-	}, [login]);
+	}, [login, location]);
 
 	const loginRoutes = (
 		<Routes>
@@ -28,7 +28,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/playlist/:pid" element={<Playlist />} />
-			<Route path="/player" element={<MusicPlayer />} />
+			<Route path="/player/:mid" element={<MusicPlayer />} />
 			<Route path="/favorites" element={<Favorites />} />
 			<Route path="/*" element={<NotFound />} />
 		</Routes>
