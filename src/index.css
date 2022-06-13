@@ -45,7 +45,7 @@ a {
 	align-items: center;
 	width: 200px;
 	height: 50px;
-	color: #293462;
+	color: #553e85;
 	border: 1px solid#fff;
 	font-weight: 700;
 	font-size: 1.4rem;
@@ -53,7 +53,7 @@ a {
 }
 
 .login-link:hover {
-	background-color: #293462;
+	background-color: #553e85;
 	color: #fff;
 }
 

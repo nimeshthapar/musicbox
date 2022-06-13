@@ -9,7 +9,6 @@ type SongListProps = {
 };
 
 const SongList = ({ tracks, currentPlaying }: SongListProps) => {
-	console.log(tracks);
 	return (
 		<Card className={classes['list-card']}>
 			<ul className={classes['song-list']}>

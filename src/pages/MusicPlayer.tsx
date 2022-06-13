@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Album from '../components/player/Album/Album';
@@ -15,7 +15,6 @@ const MusicPlayer = () => {
 	const playlistDesc = location.state.description;
 	const playlistImg = location.state.image;
 	const [tracks, setTracks] = useState<any[]>([]);
-	const [currentTrack, setCurrentTrack] = useState({});
 	const [currIdx, setCurrIdx] = useState(0);
 
 	useEffect(() => {
@@ -23,18 +22,30 @@ const MusicPlayer = () => {
 			const uri = `/playlists/${mid}/tracks`;
 			const response = await apiClient.get(uri);
 			setTracks(response.data.items);
-			setCurrentTrack(response.data.items[0]);
 			setCurrIdx(0);
 		};
 
 		fetchTracks();
 	}, [mid]);
 
+	const prevTrackHandler = useCallback(() => {
+		setCurrIdx((prev) => (prev === 0 ? tracks.length - 1 : prev - 1));
+	}, [tracks]);
+
+	const nextTrackHandler = useCallback(() => {
+		setCurrIdx((prev) => (prev === tracks.length - 1 ? 0 : prev + 1));
+	}, [tracks]);
+
 	return (
 		<div className={classes.screen}>
 			<div className={classes.player}>
 				<div className={classes['left-body']}>
-					<Player currentTrack={currentTrack} />
+					<Player
+						currentTrack={tracks[currIdx]}
+						currIdx={currIdx}
+						onPrev={prevTrackHandler}
+						onNext={nextTrackHandler}
+					/>
 					<SongList tracks={tracks} currentPlaying={currIdx} />
 				</div>
 				<div className={classes['album-container']}>

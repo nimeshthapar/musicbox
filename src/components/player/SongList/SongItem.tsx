@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { BsHeartFill, BsClockFill } from 'react-icons/bs';
 import classes from './Song.module.css';
 
@@ -17,6 +18,13 @@ const SongItem = ({
 	index,
 	currentPlaying,
 }: SongItemProps) => {
+	const highlightedRef = useRef<any>(null);
+
+	useEffect(() => {
+		if (currentPlaying)
+			highlightedRef?.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [currentPlaying]);
+
 	const second = Math.floor((time / 1000) % 60);
 	const minutes = Math.floor((time / 1000 / 60) % 60);
 	const timeString = `${minutes}:${
@@ -30,6 +38,7 @@ const SongItem = ({
 					? `${classes['song-item']} ${classes.highlighted}`
 					: classes['song-item']
 			}
+			ref={highlightedRef}
 		>
 			<span>{index < 9 ? '0' + (index + 1).toString() : index + 1}.</span>
 			<span
