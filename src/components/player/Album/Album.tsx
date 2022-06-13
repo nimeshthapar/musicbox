@@ -8,14 +8,18 @@ type AlbumProps = {
 	name: string;
 	description: string;
 	image: string;
+	noTrack: boolean;
 };
 
-const Album = ({ name, description, image }: AlbumProps) => {
+const Album = ({ name, description, image, noTrack }: AlbumProps) => {
 	return (
 		<div className={classes['card-container']}>
 			<Card className={classes.card}>
-				<AlbumImg image={image} />
-				<AlbumInfo name={name} description={description} />
+				<AlbumImg image={image} noTrack={noTrack} />
+				<AlbumInfo
+					name={noTrack ? 'Unknown' : name}
+					description={noTrack ? 'Unknown' : description}
+				/>
 			</Card>
 		</div>
 	);

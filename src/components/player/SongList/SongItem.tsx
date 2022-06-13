@@ -9,6 +9,7 @@ type SongItemProps = {
 	popularity: number;
 	index: number;
 	currentPlaying: boolean;
+	onChangeSong: (index: number) => void;
 };
 
 const SongItem = ({
@@ -17,6 +18,7 @@ const SongItem = ({
 	popularity,
 	index,
 	currentPlaying,
+	onChangeSong,
 }: SongItemProps) => {
 	const highlightedRef = useRef<any>(null);
 
@@ -39,6 +41,7 @@ const SongItem = ({
 					: classes['song-item']
 			}
 			ref={highlightedRef}
+			onClick={onChangeSong.bind(null, index)}
 		>
 			<span>{index < 9 ? '0' + (index + 1).toString() : index + 1}.</span>
 			<span

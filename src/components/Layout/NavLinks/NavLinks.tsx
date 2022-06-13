@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import {
 	MdOutlineLibraryMusic,
-	MdFavorite,
 	MdPlaylistPlay,
 	MdLogout,
 	MdLogin,
@@ -34,19 +33,10 @@ const NavLinks = () => {
 				<NavBarButton
 					Icon={BsMusicPlayer}
 					title="Player"
-					path="/player"
+					path="/player/no-track"
 					btn={false}
 				/>
 			)}
-			{isLoggedIn && (
-				<NavBarButton
-					Icon={MdFavorite}
-					title="Favorites"
-					path="/favorites"
-					btn={false}
-				/>
-			)}
-
 			{!isLoggedIn && (
 				<NavBarButton
 					Icon={MdLogin}

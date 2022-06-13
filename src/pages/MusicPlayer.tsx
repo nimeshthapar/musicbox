@@ -9,11 +9,12 @@ import classes from './shared.module.css';
 
 const MusicPlayer = () => {
 	const { mid } = useParams();
+	const noTrack = mid === 'no-track';
 	const location = useLocation();
 
-	const playlistName = location.state.name;
-	const playlistDesc = location.state.description;
-	const playlistImg = location.state.image;
+	const playlistName = noTrack ? '' : location.state.name;
+	const playlistDesc = noTrack ? '' : location.state.description;
+	const playlistImg = noTrack ? '' : location.state.image;
 	const [tracks, setTracks] = useState<any[]>([]);
 	const [currIdx, setCurrIdx] = useState(0);
 
@@ -25,8 +26,8 @@ const MusicPlayer = () => {
 			setCurrIdx(0);
 		};
 
-		fetchTracks();
-	}, [mid]);
+		if (!noTrack) fetchTracks();
+	}, [mid, noTrack]);
 
 	const prevTrackHandler = useCallback(() => {
 		setCurrIdx((prev) => (prev === 0 ? tracks.length - 1 : prev - 1));
@@ -36,23 +37,34 @@ const MusicPlayer = () => {
 		setCurrIdx((prev) => (prev === tracks.length - 1 ? 0 : prev + 1));
 	}, [tracks]);
 
+	const onChangeSong = (idx: number) => {
+		setCurrIdx(idx);
+	};
+
 	return (
 		<div className={classes.screen}>
 			<div className={classes.player}>
 				<div className={classes['left-body']}>
-					<Player
-						currentTrack={tracks[currIdx]}
-						currIdx={currIdx}
-						onPrev={prevTrackHandler}
-						onNext={nextTrackHandler}
+					{!noTrack && (
+						<Player
+							currentTrack={tracks[currIdx]}
+							currIdx={currIdx}
+							onPrev={prevTrackHandler}
+							onNext={nextTrackHandler}
+						/>
+					)}
+					<SongList
+						tracks={tracks}
+						currentPlaying={currIdx}
+						onChangeSong={onChangeSong}
 					/>
-					<SongList tracks={tracks} currentPlaying={currIdx} />
 				</div>
 				<div className={classes['album-container']}>
 					<Album
 						name={playlistName}
 						description={playlistDesc}
 						image={playlistImg}
+						noTrack={noTrack}
 					/>
 				</div>
 			</div>

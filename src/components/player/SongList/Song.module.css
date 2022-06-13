@@ -43,6 +43,18 @@
 	animation: marquee 5s linear infinite;
 }
 
+.error {
+	text-align: center;
+}
+
+.error a {
+	display: inline-block;
+	color: #553e85;
+	border-radius: 12px;
+	padding: 1rem;
+	background-color: #fff;
+}
+
 @keyframes marquee {
 	0% {
 		transform: translateX(100%);
