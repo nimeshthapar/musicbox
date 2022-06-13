@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { categoryType } from '../../models/category';
+import { useNavigate } from 'react-router-dom';
+import { playlistType } from '../../models/playlist';
 import Li from '../UI/Li/Li';
 
-type PlaylistType = categoryType;
-
-const PlayListItem = ({ id, image, name }: PlaylistType) => {
+const PlayListItem = ({ id, image, name, description }: playlistType) => {
+	const navigate = useNavigate();
+	const playListItemClickHandler = () => {
+		navigate(`/player/${id}`, { state: { name, description, image } });
+	};
 	return (
-		<Link to={`/player/${id}`}>
+		<div onClick={playListItemClickHandler}>
 			<Li id={id} image={image} name={name} />
-		</Link>
+		</div>
 	);
 };
 

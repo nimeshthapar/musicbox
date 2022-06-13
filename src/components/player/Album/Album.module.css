@@ -1,0 +1,53 @@
+.img-container {
+	overflow: hidden;
+	border-radius: 12px;
+	width: 350px;
+	height: 350px;
+	box-shadow: 12px 29px 81px 0px rgba(0, 0, 0, 0.75);
+	margin: 0;
+	text-align: center;
+}
+
+.album-info {
+	overflow: hidden;
+	width: 340px;
+}
+
+.album-info h1 {
+	white-space: nowrap;
+	text-align: center;
+	animation: marquee 6s linear infinite;
+}
+
+.album-info p {
+	text-align: center;
+}
+
+.img-container img {
+	height: 100%;
+	width: 100%;
+}
+
+.card {
+	padding: 1rem;
+	height: calc(70vh + 2rem);
+	margin-right: 2rem;
+}
+
+@keyframes marquee {
+	0% {
+		transform: translateX(100%);
+	}
+	50% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@media (max-width: 1200px) {
+	.card {
+		display: none;
+	}
+}

@@ -32,17 +32,21 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 		setClientToken(tkn);
 	}, []);
 
-	const logout = () => {
+	const logout = useCallback(() => {
 		localStorage.removeItem('token');
 		setToken('');
 		setIsLoggedIn(false);
 		navigate('/');
-	};
+	}, [navigate]);
 
 	useEffect(() => {
 		const tkn = localStorage.getItem('token');
-		if (tkn) login(tkn);
-	}, [login]);
+		if (tkn != null) {
+			login(tkn);
+		} else {
+			logout();
+		}
+	}, [login, logout]);
 
 	const value = {
 		isLoggedIn,

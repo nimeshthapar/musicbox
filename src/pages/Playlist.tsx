@@ -2,17 +2,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classes from './shared.module.css';
 import apiClient from '../util/spotify';
-import { categoryType } from '../models/category';
 import Loading from '../components/Loading/Loading';
 import PlayListItem from '../components/PlayList/PlayListItem';
 import playlistPng from '../assets/images.png';
-
-type PlaylistType = categoryType;
+import { useLocation } from 'react-router-dom';
+import { playlistType } from '../models/playlist';
 
 const Playlist = () => {
 	const { pid } = useParams();
+	const location = useLocation();
 
-	const [playlists, setPlaylists] = useState<PlaylistType[]>([]);
+	const categoryName = pid === 'me' ? 'My PlayList' : location.state.name;
+
+	const [playlists, setPlaylists] = useState<playlistType[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	let offset = useRef<number>(0);
 	useEffect(() => {
@@ -24,7 +26,7 @@ const Playlist = () => {
 					: `browse/categories/${pid}/playlists?offset=${offset.current}&limit=12`;
 			const response = await apiClient.get(uri);
 
-			const loadedPlaylists: PlaylistType[] = [];
+			const loadedPlaylists: playlistType[] = [];
 
 			for (const playlist of pid === 'me'
 				? response.data.items
@@ -36,6 +38,7 @@ const Playlist = () => {
 						playlist.images.length > 0
 							? playlist.images[0].url
 							: playlistPng,
+					description: playlist.description,
 				});
 			}
 
@@ -70,6 +73,7 @@ const Playlist = () => {
 					id={playlist.id}
 					image={playlist.image}
 					name={playlist.name}
+					description={playlist.description}
 				/>
 			))}
 		</ul>
@@ -77,9 +81,7 @@ const Playlist = () => {
 
 	return (
 		<div className={classes.screen}>
-			<h1 className={classes.heading}>
-				{pid === 'me' ? 'My PlayList' : 'Playlists'}
-			</h1>
+			<h1 className={classes.heading}>{categoryName}</h1>
 			{!isLoading && playlistUlEl}
 			{isLoading && <Loading white={true} />}
 		</div>

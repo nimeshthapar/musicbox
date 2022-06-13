@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { categoryType } from '../../models/category';
 import Li from '../UI/Li/Li';
 
 const Category = ({ id, name, image }: categoryType) => {
+	const navigate = useNavigate();
+	const liClickHandler = () => {
+		navigate(`/playlist/${id}`, { state: { name } });
+	};
 	return (
-		<Link to={`/playlist/${id}`}>
+		<div onClick={liClickHandler}>
 			<Li id={id} name={name} image={image} />
-		</Link>
+		</div>
 	);
 };
 
