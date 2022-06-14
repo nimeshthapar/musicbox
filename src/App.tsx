@@ -14,7 +14,8 @@ function App() {
 	const location = useLocation();
 	useEffect(() => {
 		const token = location.hash.split('&')[0].split('=')[1];
-		if (token !== undefined) login(token);
+
+		if (token !== undefined) login(token, -1);
 	}, [login, location]);
 
 	const loginRoutes = (

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Loading from '../components/Loading/Loading';
 import Album from '../components/player/Album/Album';
 import Player from '../components/player/Player';
 import SongList from '../components/player/SongList/SongList';
@@ -17,13 +18,16 @@ const MusicPlayer = () => {
 	const playlistImg = noTrack ? '' : location.state.image;
 	const [tracks, setTracks] = useState<any[]>([]);
 	const [currIdx, setCurrIdx] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const fetchTracks = async () => {
+			setIsLoading(true);
 			const uri = `/playlists/${mid}/tracks`;
 			const response = await apiClient.get(uri);
 			setTracks(response.data.items);
 			setCurrIdx(0);
+			setIsLoading(false);
 		};
 
 		if (!noTrack) fetchTracks();
@@ -43,31 +47,34 @@ const MusicPlayer = () => {
 
 	return (
 		<div className={classes.screen}>
-			<div className={classes.player}>
-				<div className={classes['left-body']}>
-					{!noTrack && (
-						<Player
-							currentTrack={tracks[currIdx]}
-							currIdx={currIdx}
-							onPrev={prevTrackHandler}
-							onNext={nextTrackHandler}
+			{isLoading && <Loading white={true} />}
+			{!isLoading && (
+				<div className={classes.player}>
+					<div className={classes['left-body']}>
+						{!noTrack && (
+							<Player
+								currentTrack={tracks[currIdx]}
+								currIdx={currIdx}
+								onPrev={prevTrackHandler}
+								onNext={nextTrackHandler}
+							/>
+						)}
+						<SongList
+							tracks={tracks}
+							currentPlaying={currIdx}
+							onChangeSong={onChangeSong}
 						/>
-					)}
-					<SongList
-						tracks={tracks}
-						currentPlaying={currIdx}
-						onChangeSong={onChangeSong}
-					/>
+					</div>
+					<div className={classes['album-container']}>
+						<Album
+							name={playlistName}
+							description={playlistDesc}
+							image={playlistImg}
+							noTrack={noTrack}
+						/>
+					</div>
 				</div>
-				<div className={classes['album-container']}>
-					<Album
-						name={playlistName}
-						description={playlistDesc}
-						image={playlistImg}
-						noTrack={noTrack}
-					/>
-				</div>
-			</div>
+			)}
 		</div>
 	);
 };
