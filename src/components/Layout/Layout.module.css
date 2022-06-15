@@ -8,6 +8,7 @@
 .layout.login {
 	height: 100vh;
 	padding-left: 0;
+	width: 100vw;
 }
 
 @media (max-width: 640px) {
