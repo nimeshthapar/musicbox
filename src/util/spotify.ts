@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const redirectedUrl = 'http://localhost:3000';
+const redirectedUrl = 'https://musicbox-e4946.web.app';
 const cliendId = `${process.env.REACT_APP_CLIENT_ID}`;
 const authEndpoint = 'https://accounts.spotify.com/authorize?';
 const scopes = ['playlist-read-private', 'user-library-read'];
